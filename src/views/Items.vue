@@ -1,68 +1,68 @@
 <template>
-    <v-app>
-        <v-app-bar
-            app
-            color="primary"
-            dark
-        >
-            <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-            <v-toolbar-title>Item Browser</v-toolbar-title>
-        </v-app-bar>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Item Browser</v-toolbar-title>
+    </v-app-bar>
 
-        <v-navigation-drawer
-            v-model="drawer"
-            absolute
-            temporary
-        >
-            <v-list
-                nav
-            >
-                <v-list-item-group>
-                    <v-list-item>
-                        <v-list-item-content>
-                        <v-text-field
-                            v-model="itemName"
-                            type="text"
-                            label="Item Name"
-                        ></v-text-field>
-                        </v-list-item-content>
-                    </v-list-item>
-                    <v-list-item>
-                        <v-list-item-content>
-                        <v-select
-                            v-model="itemTypes"
-                            multiple
-                            :items="generateDistinctType"
-                            label="Item Type"
-                        ></v-select>
-                        </v-list-item-content>
-                    </v-list-item>
-                </v-list-item-group>
-            </v-list>
-        </v-navigation-drawer>
+    <v-navigation-drawer
+      v-model="drawer"
+      absolute
+      temporary
+    >
+      <v-list
+        nav
+      >
+        <v-list-item-group>
+          <v-list-item>
+            <v-list-item-content>
+              <v-text-field
+                v-model="itemName"
+                type="text"
+                label="Item Name"
+              ></v-text-field>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-select
+                v-model="itemTypes"
+                multiple
+                :items="generateDistinctType"
+                label="Item Type"
+              ></v-select>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-navigation-drawer>
 
-        <v-main>
-            <v-card>
-                <v-card-title>{{ generatedResultsCount }}</v-card-title>
-                <v-list>
-                <v-list-item
-                    v-for="(item,i) in generatedResults"
-                    :key="i"
-                >
-                    <v-list-item-content>
-                    <v-btn
-                        color="primary"
-                        dark
-                    >
-                        {{ item.name }}
-                    </v-btn>
-                    {{ item.id }}
-                    </v-list-item-content>
-                </v-list-item>
-                </v-list>
-            </v-card>
-        </v-main>
-    </v-app>
+    <v-main>
+      <v-card>
+        <v-card-title>{{ generatedResultsCount }}</v-card-title>
+        <v-list>
+          <v-list-item
+            v-for="(item,i) in generatedResults"
+            :key="i"
+          >
+            <v-list-item-content>
+              <v-btn
+                color="primary"
+                dark
+              >
+                {{ item.name }}
+              </v-btn>
+              {{ item.id }}
+            </v-list-item-content>
+          </v-list-item>
+        </v-list>
+      </v-card>
+    </v-main>
+  </v-app>
 </template>
 
 <script>
@@ -73,20 +73,20 @@ export default {
   },
 
   data: () => ({
-      drawer: false,
-      rawData: null,
-      itemName: '',
-      itemTypes: [],
-      items: [
-        {
-            name: "",
-            id: "",
-            type: "",
-            subtype: "",
-            level: "",
-            rarity: "",
-            traits: []
-        }
+    drawer: false,
+    rawData: null,
+    itemName: '',
+    itemTypes: [],
+    items: [
+      {
+        name: "",
+        id: "",
+        type: "",
+        subtype: "",
+        level: "",
+        rarity: "",
+        traits: []
+      }
     ]
   }),
   mounted () {
@@ -116,24 +116,24 @@ export default {
   },
   computed: {
     generatedResults() {
-        let filteredItems = this.items;
+      let filteredItems = this.items;
 
-        // filter by name
-        if(this.itemName) {
-            let filteredByName = filteredItems.filter(obj => (obj.name.toLowerCase().indexOf(this.itemName.toLowerCase()) != -1));
-            filteredItems = filteredByName;
-        }
+      // filter by name
+      if(this.itemName) {
+        let filteredByName = filteredItems.filter(obj => (obj.name.toLowerCase().indexOf(this.   itemName.toLowerCase()) != -1));
+        filteredItems = filteredByName;
+      }
 
         // filter by type (multiple)
-        if(this.itemTypes.length) {
-            let filteredBytypes = [];
-            for(const type of this.itemTypes) {
-                let itemFilter = [];
-                itemFilter = filteredItems.filter(obj => (obj.type === type));
-                filteredBytypes = filteredBytypes.concat(itemFilter);
-            }
-            filteredItems = filteredBytypes;
+      if(this.itemTypes.length) {
+        let filteredBytypes = [];
+        for(const type of this.itemTypes) {
+          let itemFilter = [];
+          itemFilter = filteredItems.filter(obj => (obj.type === type));
+          filteredBytypes = filteredBytypes.concat(itemFilter);
         }
+        filteredItems = filteredBytypes;
+      }
 
       if(filteredItems.length === 1787) {
         return [];
