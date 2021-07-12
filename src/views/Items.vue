@@ -42,13 +42,19 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-list
-        v-for="(item,i) in generatedResults"
-        :key="i"
-        class="d-inline-flex justify-space-between pa-4"
+      <v-container
+        fluid
       >
-        <itemCard :item="item" />
-      </v-list>
+        <v-row>
+          <v-col
+            v-for="(item,i) in generatedResults"
+            :key="i"
+            class="pa-2 col-lg-4 col-md-6 col-sm-12"
+          >
+            <itemCard :item="item" />
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -96,6 +102,7 @@ export default {
           itemData.name = item.name;
           itemData.id = item._id;
           itemData.type = item.type;
+          itemData.description = item.data.description.value;
         //   itemData.subtype = item.data.group.value;
         //   itemData.level = item.data.level.value;
         //   itemData.rarity = item.data.traits.rarity.value;
