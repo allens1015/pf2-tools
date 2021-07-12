@@ -12,12 +12,21 @@
     <v-navigation-drawer
       v-model="drawer"
       absolute
-      temporary
     >
       <v-list
         nav
       >
         <v-list-item-group>
+          <v-list-item>
+            <v-list-item-content>
+              <v-select
+                v-model="selectedSort"
+                :items="sortTypes"
+                label="Sort by"
+              >
+              </v-select>
+            </v-list-item-content>
+          </v-list-item>
           <v-list-item>
             <v-list-item-content>
               <v-text-field
@@ -74,6 +83,11 @@ export default {
     rawData: null,
     itemName: '',
     itemTypes: [],
+    selectedSort: "a-z",
+    sortTypes: [
+      "a-z",
+      "level"
+    ],
     items: [
       {
         name: "",
@@ -104,9 +118,15 @@ export default {
           itemData.type = item.type;
           itemData.description = item.data.description.value;
         //   itemData.subtype = item.data.group.value;
-        //   itemData.level = item.data.level.value;
+          itemData.level = "-";
+          if(item.data.level) {
+            itemData.level = parseInt(item.data.level);
+            if(item.data.level.value) {
+              itemData.level = parseInt(item.data.level.value);
+            }
+          }
         //   itemData.rarity = item.data.traits.rarity.value;
-        //   itemData.traits = item.data.traits.value;
+          itemData.traits = item.data.traits.value;
           _items.push(itemData);
         }
         this.items = _items;    
@@ -117,7 +137,7 @@ export default {
       let filteredItems = this.items;
 
       // filter by name
-      if(this.itemName) {
+      if(this.itemName.length > 2) {
         let filteredByName = filteredItems.filter(obj => (obj.name.toLowerCase().indexOf(this.   itemName.toLowerCase()) != -1));
         filteredItems = filteredByName;
       }
@@ -135,6 +155,14 @@ export default {
 
       if(filteredItems.length === 1787) {
         return [];
+      }
+
+      // sort here
+      if(this.selectedSort == "a-z") {
+        filteredItems.sort((a,b) => (a.name > b.name) ? 1 : -1)
+      }
+      else if(this.selectedSort == "level") {
+        filteredItems.sort((a,b) => (a.level > b.level) ? 1 : -1)
       }
 
       return filteredItems;

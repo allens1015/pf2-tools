@@ -3,8 +3,21 @@
     <v-card-title
       class="break-word text-center"
     >
-      {{ item.name }}
+      <p>{{ item.name }}</p>
+      <v-spacer></v-spacer>
+      <p>{{ item.level }}</p>
     </v-card-title>
+    <v-card-subtitle>
+      <v-row>
+        <v-col
+          v-for="(trait,i) in item.traits"
+          :key="i"
+          class="pa-2"
+        >
+          {{ trait }}
+        </v-col>
+      </v-row>
+    </v-card-subtitle>
     <v-card-text>
       <!-- stuff   -->
     </v-card-text>
