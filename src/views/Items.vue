@@ -42,34 +42,25 @@
     </v-navigation-drawer>
 
     <v-main>
-      <v-card>
-        <v-card-title>{{ generatedResultsCount }}</v-card-title>
-        <v-list>
-          <v-list-item
-            v-for="(item,i) in generatedResults"
-            :key="i"
-          >
-            <v-list-item-content>
-              <v-btn
-                color="primary"
-                dark
-              >
-                {{ item.name }}
-              </v-btn>
-              {{ item.id }}
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-card>
+      <v-list
+        v-for="(item,i) in generatedResults"
+        :key="i"
+        class="d-inline-flex justify-space-between pa-4"
+      >
+        <itemCard :item="item" />
+      </v-list>
     </v-main>
   </v-app>
 </template>
 
 <script>
+import itemCard from "@/components/itemCard.vue"
+
 export default {
-  name: 'App',
+  name: 'Items',
 
   components: {
+    itemCard
   },
 
   data: () => ({
@@ -139,7 +130,7 @@ export default {
         return [];
       }
 
-        return filteredItems;
+      return filteredItems;
     },
     generatedResultsCount() {
         return this.generatedResults.length || this.items.length;
