@@ -58,7 +58,7 @@
           <v-col
             v-for="(item,i) in generatedResults"
             :key="i"
-            class="pa-2 col-lg-4 col-md-6 col-sm-12"
+            class="pa-2 col-lg-4 col-md-6 col-12"
           >
             <itemCard :item="item" />
           </v-col>
@@ -86,19 +86,10 @@ export default {
     selectedSort: "a-z",
     sortTypes: [
       "a-z",
+      "z-a",
       "level"
     ],
-    items: [
-      {
-        name: "",
-        id: "",
-        type: "",
-        subtype: "",
-        level: "",
-        rarity: "",
-        traits: []
-      }
-    ]
+    items: []
   }),
   mounted () {
     this.$http
@@ -118,11 +109,21 @@ export default {
           itemData.type = item.type;
           itemData.description = item.data.description.value;
         //   itemData.subtype = item.data.group.value;
-          itemData.level = "-";
+          itemData.level = 0;
           if(item.data.level) {
-            itemData.level = parseInt(item.data.level);
-            if(item.data.level.value) {
+            if(typeof item.data.level.value !== "undefined") {
               itemData.level = parseInt(item.data.level.value);
+              if(isNaN(itemData.level)) {
+                itemData.level = 0;
+              }
+            }
+          }
+          // need to separate into price.value/price.currency
+          itemData.price = "-";
+          if(item.data.price) {
+            itemData.price = item.data.price;
+            if(typeof item.data.price.value !== "undefined") {
+              itemData.price = item.data.price.value;
             }
           }
         //   itemData.rarity = item.data.traits.rarity.value;
@@ -160,6 +161,9 @@ export default {
       // sort here
       if(this.selectedSort == "a-z") {
         filteredItems.sort((a,b) => (a.name > b.name) ? 1 : -1)
+      }
+      else if(this.selectedSort == "z-a") {
+        filteredItems.sort((a,b) => (a.name > b.name) ? -1 : 1)
       }
       else if(this.selectedSort == "level") {
         filteredItems.sort((a,b) => (a.level > b.level) ? 1 : -1)
