@@ -67,6 +67,26 @@
               ></v-combobox>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-text-field
+                v-model="minLevel"
+                type="number"
+                label="Minimum Level"
+              >
+              </v-text-field>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-text-field
+                v-model="maxLevel"
+                type="number"
+                label="Maximum Level"
+              >
+              </v-text-field>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -106,6 +126,8 @@ export default {
     itemTypes: [],
     itemRarities: [],
     itemTraits: [],
+    minLevel: 0,
+    maxLevel: 20,
     distinctItemRarities: [
       "common",
       "uncommon",
@@ -219,6 +241,12 @@ export default {
         }
 
         filteredItems = filteredByTraits;
+      }
+
+      // filter by level
+      if(this.minLevel !== 0 || this.maxLevel !== 20) {
+        const filteredByLevel = filteredItems.filter(obj => (obj.level >= this.minLevel && obj.level <= this.maxLevel));
+        filteredItems = filteredByLevel;
       }
 
       if(filteredItems.length === 1787) {
