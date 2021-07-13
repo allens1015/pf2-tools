@@ -72,11 +72,13 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>Price</v-list-item-title>
-            <v-list-item-subtitle>{{ item.price }}</v-list-item-subtitle>
+            <v-list-item-subtitle>{{ item.price.display }}</v-list-item-subtitle>
+            <p>{{ item.price.value }} : {{ item.price.currency.value }} : {{ item.price.currency.mag }}</p>
           </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-card-text>
+    <v-divider></v-divider>
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-btn
@@ -85,6 +87,7 @@
       >
         <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
       </v-btn>
+      <v-spacer></v-spacer>
     </v-card-actions>
 
     <v-expand-transition>

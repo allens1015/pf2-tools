@@ -46,6 +46,16 @@
               ></v-select>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-select
+                v-model="itemRarities"
+                multiple
+                :items="distinctItemRarities"
+                label="Item Rarity"
+              ></v-select>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -83,11 +93,20 @@ export default {
     rawData: null,
     itemName: '',
     itemTypes: [],
+    itemRarities: [],
+    distinctItemRarities: [
+      "common",
+      "uncommon",
+      "rare",
+      "unique"
+    ],
     selectedSort: "a-z",
     sortTypes: [
       "a-z",
       "z-a",
-      "level"
+      "level",
+      "price (high to low)",
+      "price (low to high)"
     ],
     items: []
   }),
@@ -108,6 +127,7 @@ export default {
           itemData.id = item._id;
           itemData.type = item.type;
           itemData.description = item.data.description.value;
+          itemData.rarity = item.data.traits.rarity.value;
         //   itemData.subtype = item.data.group.value;
           itemData.level = 0;
           if(item.data.level) {
@@ -119,13 +139,25 @@ export default {
             }
           }
           // need to separate into price.value/price.currency
-          itemData.price = "-";
+          itemData.price = {};
+          itemData.price.display = "-";
           if(item.data.price) {
-            itemData.price = item.data.price;
+            itemData.price.display = item.data.price;
             if(typeof item.data.price.value !== "undefined") {
-              itemData.price = item.data.price.value;
+              itemData.price.display = item.data.price.value;
             }
           }
+          itemData.price.value = String(itemData.price.display).replace(',','').replace(/(\d+).*/,"$1");
+          itemData.price.currency = {};
+          itemData.price.currency.value = String(itemData.price.display).replace(/.*([gsc]p)/,"$1");
+          itemData.price.currency.mag = 100;
+          if(itemData.price.currency.value.toLowerCase() == "sp") {
+            itemData.price.currency.mag = 10;
+          }
+          if(itemData.price.currency.value.toLowerCase() == "cp") {
+            itemData.price.currency.mag = 1;
+          }
+
         //   itemData.rarity = item.data.traits.rarity.value;
           itemData.traits = item.data.traits.value;
           _items.push(itemData);
@@ -143,7 +175,7 @@ export default {
         filteredItems = filteredByName;
       }
 
-        // filter by type (multiple)
+      // filter by type (multiple)
       if(this.itemTypes.length) {
         let filteredBytypes = [];
         for(const type of this.itemTypes) {
@@ -152,6 +184,17 @@ export default {
           filteredBytypes = filteredBytypes.concat(itemFilter);
         }
         filteredItems = filteredBytypes;
+      }
+
+      // filter by rarity (multiple)
+      if(this.itemRarities.length) {
+        let filteredByRarities = [];
+        for(const rarity of this.itemRarities) {
+          let itemFilter = [];
+          itemFilter = filteredItems.filter(obj => (obj.rarity === rarity));
+          filteredByRarities = filteredByRarities.concat(itemFilter);
+        }
+        filteredItems = filteredByRarities;
       }
 
       if(filteredItems.length === 1787) {
@@ -168,6 +211,12 @@ export default {
       else if(this.selectedSort == "level") {
         filteredItems.sort((a,b) => (a.level > b.level) ? 1 : -1)
       }
+      else if(this.selectedSort == "price (high to low)") {
+        filteredItems.sort((a,b) => (a.price.value * a.price.currency.mag > b.price.value * b.price.currency.mag) ? -1 : 1)
+      }
+      else if(this.selectedSort == "price (low to high)") {
+        filteredItems.sort((a,b) => (a.price.value * a.price.currency.mag > b.price.value * b.price.currency.mag) ? 1 : -1)
+      }
 
       return filteredItems;
     },
@@ -175,7 +224,7 @@ export default {
         return this.generatedResults.length || this.items.length;
     },
     generateDistinctType() {
-      const types = [...new Set(this.items.map(item => (item.type)).sort((a,b) => ( a-b) ) )];
+      const types = [...new Set(this.items.map(item => (item.type)).sort((a,b) => (a > b) ? 1 : -1 ) )];
       return types;
     }
   }
