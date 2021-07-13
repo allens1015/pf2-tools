@@ -73,7 +73,6 @@
           <v-list-item-content>
             <v-list-item-title>Price</v-list-item-title>
             <v-list-item-subtitle>{{ item.price.display }}</v-list-item-subtitle>
-            <p>{{ item.price.value }} : {{ item.price.currency.value }} : {{ item.price.currency.mag }}</p>
           </v-list-item-content>
         </v-list-item>
       </v-list>

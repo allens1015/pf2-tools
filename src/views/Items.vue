@@ -56,6 +56,17 @@
               ></v-select>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-combobox
+                v-model="itemTraits"
+                multiple
+                chips
+                :items="generateDistinctTraits"
+                label="Item Traits"
+              ></v-combobox>
+            </v-list-item-content>
+          </v-list-item>
         </v-list-item-group>
       </v-list>
     </v-navigation-drawer>
@@ -94,6 +105,7 @@ export default {
     itemName: '',
     itemTypes: [],
     itemRarities: [],
+    itemTraits: [],
     distinctItemRarities: [
       "common",
       "uncommon",
@@ -197,6 +209,18 @@ export default {
         filteredItems = filteredByRarities;
       }
 
+      // filter by trait
+      if(this.itemTraits.length) {
+        const filteredByTraits = [];
+        for(let item of filteredItems) {
+          if(this.itemTraits.every(trait => (item.traits.indexOf(trait) != -1))) {
+            filteredByTraits.push(item);
+          }
+        }
+
+        filteredItems = filteredByTraits;
+      }
+
       if(filteredItems.length === 1787) {
         return [];
       }
@@ -222,6 +246,18 @@ export default {
     },
     generatedResultsCount() {
         return this.generatedResults.length || this.items.length;
+    },
+    generateDistinctTraits() {
+      const rawTraits = [];
+      for(let item of this.items) {
+        if(item.traits.length > 0) {
+          for(let trait of item.traits) {
+            rawTraits.push(trait);
+          }
+        }
+      }
+      const traits = [...new Set(rawTraits)].sort((a,b) => (a > b) ? 1 : -1 );
+      return traits;
     },
     generateDistinctType() {
       const types = [...new Set(this.items.map(item => (item.type)).sort((a,b) => (a > b) ? 1 : -1 ) )];
