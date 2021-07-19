@@ -191,6 +191,7 @@ export default {
           if(itemData.price.currency.value.toLowerCase() == "cp") {
             itemData.price.currency.mag = 1;
           }
+          itemData.price.intPrice = itemData.price.value * itemData.price.currency.mag;
 
         //   itemData.rarity = item.data.traits.rarity.value;
           itemData.traits = item.data.traits.value;
@@ -264,10 +265,10 @@ export default {
         filteredItems.sort((a,b) => (a.level > b.level) ? 1 : -1)
       }
       else if(this.selectedSort == "price (high to low)") {
-        filteredItems.sort((a,b) => (a.price.value * a.price.currency.mag > b.price.value * b.price.currency.mag) ? -1 : 1)
+        filteredItems.sort((a,b) => (a.price.intPrice > b.price.intPrice) ? -1 : 1)
       }
       else if(this.selectedSort == "price (low to high)") {
-        filteredItems.sort((a,b) => (a.price.value * a.price.currency.mag > b.price.value * b.price.currency.mag) ? 1 : -1)
+        filteredItems.sort((a,b) => (a.price.intPrice > b.price.intPrice) ? 1 : -1)
       }
 
       return filteredItems;
