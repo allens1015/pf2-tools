@@ -9,6 +9,24 @@
   </div>
 </template>
 
+<script>
+import spellsModel from './models/spells';
+import itemsModel from './models/items';
+
+export default {
+    name: 'App',
+    data() {
+        return {
+
+        };
+    },
+    mounted() {
+        spellsModel.loadSpells();
+        itemsModel.loadItems();
+    }
+}
+</script>
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
