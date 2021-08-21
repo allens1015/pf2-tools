@@ -1,5 +1,7 @@
 module.exports = {
-  transpileDependencies: [
-    'vuetify'
-  ]
+    publicPath: process.env.production ? '/pf2e' : '',
+    outputDir: 'dist/pf2e',
+    transpileDependencies: [
+        'vuetify'
+    ]
 }
