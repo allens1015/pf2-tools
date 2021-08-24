@@ -4,8 +4,8 @@ class MonsterChanger {
     constructor() {
         this.crFrom= 0;
         this.crTo= 1;
-        this.oldPerception= 0;
-        this.oldSkills= [];
+        this.perceptionFrom= 0;
+        this.skillsFrom= [];
         this.addingSkillName= "";
         this.addingSkillValue= 0;
         this.abilityModifiers= monsterChangerData.abilityModifiers;

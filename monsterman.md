@@ -32,3 +32,12 @@ vue child structure is fucked and weird
 
 ok, better plan: use a class model and reference that instead of passing garbage up
 working on the laptop
+
+ok, that part's done, so now we need to get the rest of the pieces in place on the front, then make the backend go
+
+im confused about how to do skills- i can do the rest
+for skills... i have an empty array at the start in the store
+and then we're gonna add a {name:name, value:value} as we add more skills
+which means the dialog has inputfields but doesnt directly address the store, so...
+not an inputfield vue sfc
+i think the check box adds the json
