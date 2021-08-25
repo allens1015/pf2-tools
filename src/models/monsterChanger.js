@@ -9,6 +9,12 @@ class MonsterChanger {
         this.perceptionTo = 0;
         this.skillsFrom = [];
         this.statsFrom = [0,0,0,0,0,0];
+        this.strFrom = 0;
+        this.dexFrom = 0;
+        this.conFrom = 0;
+        this.intFrom = 0;
+        this.wisFrom = 0;
+        this.chaFrom = 0;
         this.acFrom = 10;
         this.hpFrom = 1;
         this.savesFrom = [10,10,10];

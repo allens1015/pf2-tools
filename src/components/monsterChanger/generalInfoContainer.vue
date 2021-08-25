@@ -29,11 +29,12 @@
     <!-- stats frame -->
     <v-row>
       <v-col
-        v-for="(stat,i) in monsterChanger.statsFrom"
+        v-for="(stat,i) in stats"
         :key="i"
       >
         <stat-entry
           :i="i"
+          :propertyName="stat"
         ></stat-entry>
       </v-col>
     </v-row>
@@ -51,7 +52,8 @@ export default {
   name: "generalInfoContainer",
   components: { inputField, skillEntry, addFromSkillContainer, statEntry },
   data: () => ({
-    monsterChanger  
+    monsterChanger,
+    stats: ["strFrom","dexFrom","conFrom","intFrom","wisFrom","chaFrom"]
   })
 }
 </script>

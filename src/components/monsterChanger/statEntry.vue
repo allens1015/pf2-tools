@@ -2,7 +2,7 @@
   <v-text-field
     type="number"
     :label="monsterChanger.statsLabels[i]"
-    @input="updateStatFrom($event,i)"
+    @input="updateStatFrom($event)"
     value=0
   >
   </v-text-field>
@@ -10,18 +10,16 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
-import shake from "@/helpers/shaker.js";
 
 export default {
   name: "statEntry",
-  props: ["i"],
+  props: ["propertyName","i"],
   data: () => ({
     monsterChanger
   }),
   methods: {
-    updateStatFrom(value,i) {
-      monsterChanger.statsFrom[i] = value;
-      shake();
+    updateStatFrom(value) {
+      monsterChanger[this.propertyName] = value;
     }
   }
 }
