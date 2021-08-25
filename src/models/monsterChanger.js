@@ -7,6 +7,10 @@ class MonsterChanger {
         this.perceptionFrom= 0;
         this.skillsFrom= [];
         this.statsFrom = [0,0,0,0,0,0];
+        this.acFrom = 10;
+        this.hpFrom = 1;
+        this.savesFrom = [10,10,10];
+        this.savesLabels = ["Fortitude","Reflex","Will"];
         this.statsLabels = ["Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma"];
         this.addingSkillName= "";
         this.addingSkillValue= 0;

@@ -41,3 +41,5 @@ and then we're gonna add a {name:name, value:value} as we add more skills
 which means the dialog has inputfields but doesnt directly address the store, so...
 not an inputfield vue sfc
 i think the check box adds the json
+
+ok general done, now do defenses, then offenses

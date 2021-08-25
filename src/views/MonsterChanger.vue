@@ -6,6 +6,7 @@
         :crTo = "monsterChanger.crTo"
       ></cr-fields-container>
       <general-info-container></general-info-container>
+      <defenses-container></defenses-container>
     </v-main>
   </v-app>
 </template>
@@ -14,9 +15,10 @@
 import monsterChanger from "@/models/monsterChanger.js";
 import crFieldsContainer from '@/components/monsterChanger/crFieldsContainer.vue';
 import generalInfoContainer from '@/components/monsterChanger/generalInfoContainer.vue';
+import defensesContainer from '@/components/monsterChanger/defensesContainer.vue';
 
 export default {
-  components: { crFieldsContainer, generalInfoContainer },
+  components: { crFieldsContainer, generalInfoContainer, defensesContainer },
   name: "monsterChanger",
   data: () => ({
     // models

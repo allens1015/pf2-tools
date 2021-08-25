@@ -1,8 +1,8 @@
 <template>
   <v-text-field
     type="number"
-    :label="monsterChanger.statsLabels[i]"
-    @input="updateStatFrom($event,i)"
+    :label="monsterChanger.savesLabels[i]"
+    @input="updateSaveFrom($event,i)"
   >
   </v-text-field>
 </template>
@@ -11,14 +11,14 @@
 import monsterChanger from "@/models/monsterChanger.js";
 
 export default {
-  name: "statEntry",
+  name: "saveEntry",
   props: ["i"],
   data: () => ({
     monsterChanger
   }),
   methods: {
-    updateStatFrom(value,i) {
-      monsterChanger.statsFrom[i] = value;
+    updateSaveFrom(value,i) {
+      monsterChanger.savesFrom[i] = value;
     }
   }
 }
