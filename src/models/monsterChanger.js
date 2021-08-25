@@ -18,6 +18,8 @@ class MonsterChanger {
         this.addingAttackModifier="";
         this.addingAttackDamage="";
         this.attacksFrom = [];
+        this.spellDCFrom = 0;
+        this.spellAttackFrom = 0;
         this.abilityModifiers= monsterChangerData.abilityModifiers;
         this.ac= monsterChangerData.ac;
         this.hp= monsterChangerData.hp;
