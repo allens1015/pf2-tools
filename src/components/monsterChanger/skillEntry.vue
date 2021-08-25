@@ -22,7 +22,8 @@
 </template>
 
 <script>
-import monsterChanger from "@/models/monsterChanger.js"
+import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
 
 export default {
   name: "skillEntry",
@@ -33,6 +34,7 @@ export default {
   methods: {
     deleteSkill(i) {
       monsterChanger.skillsFrom.splice(i,1);
+      shake();
     }
   }
 }

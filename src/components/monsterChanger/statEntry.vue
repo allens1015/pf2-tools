@@ -10,6 +10,7 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
 
 export default {
   name: "statEntry",
@@ -19,7 +20,8 @@ export default {
   }),
   methods: {
     updateStatFrom(value,i) {
-      monsterChanger.statsFrom[i] = value
+      monsterChanger.statsFrom[i] = value;
+      shake();
     }
   }
 }

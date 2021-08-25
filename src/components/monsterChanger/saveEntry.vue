@@ -9,6 +9,7 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
 
 export default {
   name: "saveEntry",
@@ -19,6 +20,7 @@ export default {
   methods: {
     updateSaveFrom(value,i) {
       monsterChanger.savesFrom[i] = value;
+      shake();
     }
   }
 }

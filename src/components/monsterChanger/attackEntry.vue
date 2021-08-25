@@ -32,6 +32,7 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
 
 export default {
   name: "attackEntry",
@@ -42,6 +43,7 @@ export default {
   methods: {
     deleteAttack(i) {
       monsterChanger.attacksFrom.splice(i,1);
+      shake();
     }
   }
 }
