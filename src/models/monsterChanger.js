@@ -14,6 +14,10 @@ class MonsterChanger {
         this.statsLabels = ["Strength","Dexterity","Constitution","Intelligence","Wisdom","Charisma"];
         this.addingSkillName= "";
         this.addingSkillValue= 0;
+        this.addingAttackName="";
+        this.addingAttackModifier="";
+        this.addingAttackDamage="";
+        this.attacksFrom = [];
         this.abilityModifiers= monsterChangerData.abilityModifiers;
         this.ac= monsterChangerData.ac;
         this.hp= monsterChangerData.hp;
