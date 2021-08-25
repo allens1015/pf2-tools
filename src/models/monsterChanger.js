@@ -2,10 +2,11 @@ import monsterChangerData from "@/assets/monsterChanger.json";
 
 class MonsterChanger {
     constructor() {
-        this.crFrom= 0;
+        this.crFrom = 0;
         this.crTo= 1;
-        this.perceptionFrom= 0;
-        this.skillsFrom= [];
+        this.perceptionFrom = 0;
+        this.perceptionTo = 0;
+        this.skillsFrom = [];
         this.statsFrom = [0,0,0,0,0,0];
         this.acFrom = 10;
         this.hpFrom = 1;
