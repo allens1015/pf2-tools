@@ -100,8 +100,12 @@ export default {
       const validRowTo = monsterChanger.hp[crToProcessed];
 
       const i = validRowFrom.findIndex(element => hpFrom >= element.min && hpFrom <= element.max && element.min != -1 && element.max != -1);
+      let alt = -1;
+      if(hpFrom > alt) {
+        alt = hpFrom;
+      }
       const newValue = validRowTo[i] || -1;
-      let str = -1;
+      let str = alt;
       if(newValue != -1) {
         const avg = Math.ceil((newValue.min + newValue.max)/2);
         str = `${avg} (${newValue.min}-${newValue.max})`;
@@ -110,6 +114,7 @@ export default {
       return str;
     },
     getNewScalarValue(propertyFrom,propertyArray) {
+      const propertyValue = parseInt(monsterChanger[propertyFrom]);
       // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0
       const crToProcessed = parseInt(monsterChanger.crTo) + 1;
       const crFromProcessed = parseInt(monsterChanger.crFrom) + 1;
@@ -119,8 +124,12 @@ export default {
       const validRowTo = monsterChanger[propertyArray][crToProcessed];
 
       // figure out which column is the focus
-      const i = validRowFrom.findIndex(element => parseInt(monsterChanger[propertyFrom]) >= element && element != -1);
-      const newValue = validRowTo[i] || -1;
+      const i = validRowFrom.findIndex(element => propertyValue >= element && element != -1);
+      let alt = -1;
+      if(propertyValue > -1) {
+        alt = propertyValue;
+      }
+      const newValue = validRowTo[i] || alt;
 
       return newValue;
     }
