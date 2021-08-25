@@ -3,7 +3,7 @@
     type="number"
     :label="monsterChanger.statsLabels[i]"
     @input="updateStatFrom($event)"
-    value=0
+    placeholder=0
   >
   </v-text-field>
 </template>

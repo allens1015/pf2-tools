@@ -15,6 +15,9 @@ class MonsterChanger {
         this.intFrom = 0;
         this.wisFrom = 0;
         this.chaFrom = 0;
+        this.fortFrom = 0;
+        this.refFrom = 0;
+        this.willFrom = 0;
         this.acFrom = 10;
         this.hpFrom = 1;
         this.savesFrom = [10,10,10];

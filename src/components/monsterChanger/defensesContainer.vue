@@ -10,11 +10,12 @@
         </input-field>
       </v-col>
       <v-col
-        v-for="(save,i) in monsterChanger.savesFrom"
+        v-for="(save,i) in saves"
         :key="i"
       >
         <save-entry
           :i="i"
+          :propertyName="save"
         ></save-entry>
       </v-col>
       <v-col>
@@ -37,7 +38,8 @@ export default {
   name: "defensesContainer",
   components: { inputField, saveEntry },
   data: () => ({
-    monsterChanger
+    monsterChanger,
+    saves: ["fortFrom","refFrom","willFrom"]
   })  
 }
 </script>
