@@ -3,6 +3,7 @@
     type="number"
     :label="monsterChanger.statsLabels[i]"
     @input="updateStatFrom($event,i)"
+    value=0
   >
   </v-text-field>
 </template>
@@ -18,7 +19,7 @@ export default {
   }),
   methods: {
     updateStatFrom(value,i) {
-      monsterChanger.statsFrom[i] = value;
+      monsterChanger.statsFrom[i] = value
     }
   }
 }

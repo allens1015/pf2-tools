@@ -11,6 +11,7 @@
 import monsterChanger from "@/models/monsterChanger.js"
 
 export default {
+    name: "inputEntry",
     props: ["type","label","property"],
     data: () => ({
       monsterChanger

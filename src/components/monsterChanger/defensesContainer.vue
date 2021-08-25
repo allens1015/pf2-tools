@@ -24,6 +24,9 @@
           label="hp"
         ></input-field>
       </v-col>
+      <v-col>
+        {{ monsterChanger.savesFrom }}
+      </v-col>
     </v-row>
   </v-container>
 </template>
