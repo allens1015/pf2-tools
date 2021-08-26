@@ -18,6 +18,28 @@
         @input="updateAttack('damage',$event,i)"
       >
       </v-text-field>
+      <v-text-field
+        type="text"
+        label="Damage Type"
+        :value="attack.damageType"
+        @input="updateAttack('damageType,$event,i')"
+      >
+      </v-text-field>
+      <v-text-field
+        type="text"
+        label="Bonus Damage"
+        :value="attack.bonusDamage"
+        @input="updateAttack('bonusDamage',$event,i)"
+      >
+      </v-text-field>
+      <v-text-field
+        type="text"
+        label="Damage Type"
+        :value="attack.bonusDamageType"
+        @input="updateAttack('bonusDamageType,$event,i')"
+      >
+
+      </v-text-field>
     </v-card-text>
     <v-card-actions>
       <v-btn

@@ -2,6 +2,7 @@
   <v-text-field
     :type="type"
     :label="label"
+    :value="monsterChanger[property]"
     @input="updateMonsterChanger(property,$event)"
   >
   </v-text-field>

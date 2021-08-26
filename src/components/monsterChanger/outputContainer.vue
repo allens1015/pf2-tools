@@ -18,6 +18,7 @@
         <p class="text-h4 text--primary">{{ getNewScalarValue('perceptionFrom','perception') }}</p>
       </v-col>
     </v-row>
+    <!-- skills -->
     <v-row>
       <v-col
         v-for="(skill,i) in monsterChanger.skillsFrom"
@@ -71,7 +72,9 @@
       >
         <v-card>
           <v-card-text>
-            <b>{{ attack.name }}</b> +{{ getNewAttackValue(attack.modifier) }} {{ getNewDamageValue(attack.damage) }}
+            <b>{{ attack.name }}</b> +{{ getNewAttackValue(attack.modifier) }} {{ getNewDamageValue(attack.damage) }} {{ attack.damageType }}
+            <br/>
+            <span v-if="attack.bonusDamage"><b>Plus {{ attack.bonusDamage }} {{ attack.bonusDamageType }}</b></span>
           </v-card-text>
         </v-card>
       </v-col>

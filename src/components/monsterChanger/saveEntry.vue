@@ -2,6 +2,7 @@
   <v-text-field
     type="number"
     :label="monsterChanger.savesLabels[i]"
+    :value="monsterChanger[propertyName]"
     @input="updateSaveFrom($event)"
     placeholder=0
   >

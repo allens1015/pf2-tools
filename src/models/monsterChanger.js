@@ -28,6 +28,9 @@ class MonsterChanger {
         this.addingAttackName="";
         this.addingAttackModifier="";
         this.addingAttackDamage="";
+        this.addingBonusDamage="";
+        this.addingAttackDamageType="";
+        this.addingBonusDamageType="";
         this.attacksFrom = [];
         this.spellDCFrom = 0;
         this.spellAttackFrom = 0;

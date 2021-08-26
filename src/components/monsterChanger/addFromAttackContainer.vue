@@ -49,6 +49,16 @@
               </v-text-field>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-text-field
+                @input="changeAddingBonusDamage($event)"
+                type="text"
+                label="Bonus Damage"
+              >
+              </v-text-field>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card-text>
       <v-card-actions>
@@ -95,8 +105,12 @@ export default {
       monsterChanger.addingAttackDamage = value;
       shake();
     },
+    changeAddingBonusDamage(value) {
+      monsterChanger.addingBonusDamage = value;
+      shake();
+    },
     addAttack() {
-      const addedAttack = {"name":monsterChanger.addingAttackName,"modifier":monsterChanger.addingAttackModifier,"damage":monsterChanger.addingAttackDamage};
+      const addedAttack = {"name":monsterChanger.addingAttackName,"modifier":monsterChanger.addingAttackModifier,"damage":monsterChanger.addingAttackDamage,"bonusDamage":monsterChanger.addingBonusDamage};
       monsterChanger.attacksFrom.push(addedAttack);
       shake();
     },
