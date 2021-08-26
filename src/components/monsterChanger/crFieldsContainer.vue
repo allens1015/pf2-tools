@@ -1,5 +1,14 @@
 <template>
   <v-container>
+    <h2>
+      <v-text-field
+        label="Name"
+        type="text"
+        :value="monsterChanger.name"
+        @input="updateName($event)"
+      >
+      </v-text-field>
+    </h2>
     <v-row>
       <v-col>
         <v-text-field
@@ -55,8 +64,12 @@ export default {
     }
   },
   methods: {
+    updateName(value) {
+      monsterChanger.name = value;
+    },
     updateFields() {
       if(typeof this.selectedMonster === 'object' && this.selectedMonster !== null) {
+        monsterChanger.name = this.selectedMonster.name;
         monsterChanger.strFrom = this.selectedMonster.data.abilities.str.mod;
         monsterChanger.dexFrom = this.selectedMonster.data.abilities.dex.mod;
         monsterChanger.conFrom = this.selectedMonster.data.abilities.con.mod;

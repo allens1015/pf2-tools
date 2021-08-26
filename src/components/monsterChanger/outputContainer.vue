@@ -1,16 +1,6 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col>
-        <v-btn
-          @click="process()"
-        >
-          <v-icon>
-            mdi-refresh
-          </v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
+    <h2>{{ monsterChanger.name }}</h2>
     <!-- perception -->
     <v-row>
       <v-col>
@@ -95,7 +85,6 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
-import shake from "@/helpers/shaker.js";
 
 export default {
   name: "outputContainer",
@@ -105,9 +94,6 @@ export default {
     saves: ["fortFrom","refFrom","willFrom"]
   }),
   methods: {
-    process() {
-      shake();
-    },
     getNewSkillValue(propertyValue) {
       // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0
       const intPropertyValue = parseInt(propertyValue);
@@ -127,6 +113,9 @@ export default {
         let max = 0;
         if(newValue.min) {
           min = parseInt(newValue.min);
+          if(min < propertyValue) {
+            min = propertyValue;
+          }
         }
         if(newValue.max) {
           max = parseInt(newValue.max);

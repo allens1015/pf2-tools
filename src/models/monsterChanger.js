@@ -2,7 +2,7 @@ import monsterChangerData from "@/assets/monsterChanger.json";
 
 class MonsterChanger {
     constructor() {
-        this.shaker = 0;
+        this.name = "";
         this.crFrom = 0;
         this.crTo= 1;
         this.perceptionFrom = 0;
