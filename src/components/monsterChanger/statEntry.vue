@@ -2,6 +2,7 @@
   <v-text-field
     type="number"
     :label="monsterChanger.statsLabels[i]"
+    :value="monsterChanger[propertyName]"
     @input="updateStatFrom($event)"
     placeholder=0
   >

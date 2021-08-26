@@ -3,10 +3,7 @@
     <v-main>
       <v-container>
         <v-card>
-          <cr-fields-container
-            :crFrom = "monsterChanger.crFrom"
-            :crTo = "monsterChanger.crTo"
-          ></cr-fields-container>
+          <cr-fields-container></cr-fields-container>
         </v-card>
       </v-container>
       <v-container>
