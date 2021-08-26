@@ -188,18 +188,36 @@ export default {
       const validRowFrom = monsterChanger.hp[crFromProcessed];
       const validRowTo = monsterChanger.hp[crToProcessed];
 
-      const i = validRowFrom.findIndex(element => hpFrom >= element.min && hpFrom <= element.max && element.min != -1 && element.max != -1);
-      let alt = -1;
-      if(hpFrom > alt) {
-        alt = hpFrom;
+      // check for out of bounds
+      let hpEntryIndex;
+      if(hpFrom < parseInt(validRowFrom[validRowFrom.length-1].min)) {
+        hpEntryIndex = validRowFrom.length-1;
       }
-      const newValue = validRowTo[i] || -1;
-      let str = alt;
-      if(newValue != -1) {
-        const avg = Math.ceil((newValue.min + newValue.max)/2);
-        str = `${avg} (${newValue.min}-${newValue.max})`;
+      if(hpFrom > parseInt(validRowFrom[0].max)) {
+        hpEntryIndex = 0;
+      } 
+      
+      // it's in bounds, but the min/max of each entry do not exactly line up
+      if(hpEntryIndex === undefined) {
+        for(const i in validRowFrom) {
+          const min = validRowFrom[i].min;
+          const max = validRowFrom[i].max;
+          if(hpFrom >= min && hpFrom <= max) {
+            hpEntryIndex = i;
+          }
+          // if it's inbetween 2 categories, put it at the higher one
+          else if(i != validRowFrom.length-1) {
+            if(hpFrom > validRowFrom[validRowFrom.length-1].max && hpFrom < validRowFrom[i].min) {
+              // rounding up basically
+              hpEntryIndex = i;
+            }
+          }
+        }
       }
 
+      const newValue = validRowTo[hpEntryIndex] || -1;
+      const avg = Math.ceil((newValue.min + newValue.max)/2);
+      const str = `${avg} (${newValue.min}-${newValue.max})`;
       return str;
     },
     getNewScalarValue(propertyFrom,propertyArray) {

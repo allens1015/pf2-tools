@@ -7,7 +7,9 @@
         </v-card>
       </v-container>
       <v-container>
-        <v-card>
+        <v-card
+          elevation="10"
+        >
           <output-container></output-container>
         </v-card>
       </v-container>
