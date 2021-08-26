@@ -30,7 +30,6 @@
         :key="i"
       >
         <label>{{ monsterChanger.statsLabels[i] }}</label>
-        <!-- {{ propertyName }} -->
         <p class="text-h4 text--primary">{{ getNewScalarValue(propertyName,'stats') }}</p>
       </v-col>
     </v-row>
@@ -80,8 +79,68 @@
         <p class="text-h4 text--primary">{{ getNewScalarValue('spellAttackFrom','spellAttack') }}</p>
       </v-col>
     </v-row>
+    <!-- text out -->
+    <v-container>
+      <h3>{{ monsterChanger.name }}</h3>
+      <ol
+        class="text-left text-output-list"
+      >
+        <li>
+          <span class="font-weight-bold">Perception</span> <span>{{ getNewScalarValue('perceptionFrom','perception') }}</span>
+        </li>
+        <li>
+          <span class="font-weight-bold">Skills </span>
+          <span
+            v-for="(skill,i) in monsterChanger.skillsFrom"
+            :key="i"
+          >
+            <template v-if="i > 0">, </template>
+            <span>{{ skill.name }} +{{ getNewSkillValue(skill.value) }}</span>
+          </span>
+        </li>
+        <li>
+          <span
+            v-for="(propertyName,i) in monsterChanger.statsFrom"
+            :key="i"
+          >
+            <template v-if="i > 0">, </template>
+            <span class="font-weight-bold">{{ monsterChanger.statsLabels[i] }}</span> <span>{{ getNewScalarValue(propertyName,'stats') }}</span>
+          </span>
+          <hr/>
+        </li>
+        <li>
+          <span class="font-weight-bold">AC</span> <span>{{ getNewScalarValue('acFrom','ac') }}; </span>
+          <span
+            v-for="(propertyName,i) in saves"
+            :key="i"
+          >
+            <template v-if="i > 0">, </template>
+            <span class="font-weight-bold">{{ monsterChanger.savesLabels[i] }}</span> <span>+{{ getNewScalarValue(propertyName,'saves') }}</span>
+          </span>
+        </li>
+        <li>
+          <span class="font-weight-bold">HP</span> <span>{{ getNewHPValue() }}</span>
+          <hr/>
+        </li>
+        <li
+          v-for="(attack,i) in monsterChanger.attacksFrom"
+          :key="i"
+        >
+          <span class="font-weight-bold text-capitalize">{{ attack.method }}</span> <span>{{ attack.name }}+{{ getNewAttackValue(attack.modifier) }},</span> <span class="font-weight-bold">Damage</span> <span>{{ getNewDamageValue(attack.damage) }} {{ attack.damageType }}</span> <span v-if="attack.bonusDamage">plus {{ attack.bonusDamage }} {{ attack.bonusDamageType }}</span>
+        </li>
+        <li>
+          <span class="font-weight-bold">Spell DC</span> <span>{{ getNewScalarValue('spellDCFrom','spellDC') }}, attack +{{ getNewScalarValue('spellAttackFrom','spellAttack') }}</span>
+        </li>
+      </ol>      
+    </v-container>
   </v-container>
 </template>
+
+<style scoped>
+  .text-output-list {
+    list-style-type: none;
+  }
+</style>
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";

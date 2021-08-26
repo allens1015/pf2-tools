@@ -59,6 +59,24 @@
               </v-text-field>
             </v-list-item-content>
           </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
+              <v-radio-group
+                v-model="attackMethod"
+              >
+                <v-radio
+                  label="Melee"
+                  value="melee"
+                >
+                </v-radio>
+                <v-radio
+                  label="Ranged"
+                  value="ranged"
+                > 
+                </v-radio>
+              </v-radio-group>
+            </v-list-item-content>
+          </v-list-item>
         </v-list>
       </v-card-text>
       <v-card-actions>
@@ -90,9 +108,13 @@ export default {
   name: "addAttackContainer",
   data: () => ({
     monsterChanger,
-    attackDialogue: false
+    attackDialogue: false,
+    attackMethod: "melee"
   }),
   methods: {
+    changeDamageMethod(value) {
+      console.log(value);
+    },
     changeAddingAttackName(value) {
       monsterChanger.addingAttackName = value;
       shake();
@@ -110,7 +132,7 @@ export default {
       shake();
     },
     addAttack() {
-      const addedAttack = {"name":monsterChanger.addingAttackName,"modifier":monsterChanger.addingAttackModifier,"damage":monsterChanger.addingAttackDamage,"bonusDamage":monsterChanger.addingBonusDamage};
+      const addedAttack = {"name":monsterChanger.addingAttackName,"modifier":monsterChanger.addingAttackModifier,"damage":monsterChanger.addingAttackDamage,"bonusDamage":monsterChanger.addingBonusDamage,"method":this.attackMethod};
       monsterChanger.attacksFrom.push(addedAttack);
       shake();
     },
