@@ -21,7 +21,7 @@
         </li>
         <li>
           <span
-            v-for="(propertyName,i) in monsterChanger.statsFrom"
+            v-for="(propertyName,i) in stats"
             :key="i"
           >
             <template v-if="i > 0">, </template>

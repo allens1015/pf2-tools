@@ -96,7 +96,7 @@ export default {
               bonusDamage = itemInfo.data.damageRolls[damageKeys[1]].damage;
               bonusDamageType = itemInfo.data.damageRolls[damageKeys[1]].damageType;
             }
-            const attackEntry = {"name":itemInfo.name,"modifier":itemInfo.data.bonus.value,"damage":damageInfo.damage,"damageType":damageInfo.damageType,"bonusDamage":bonusDamage,"bonusDamageType":bonusDamageType,"method":itemInfo.type};
+            const attackEntry = {"name":itemInfo.name,"modifier":itemInfo.data.bonus.value,"damage":damageInfo.damage,"damageType":damageInfo.damageType,"bonusDamage":bonusDamage,"bonusDamageType":bonusDamageType,"method":itemInfo.data.weaponType.value};
             monsterChanger.attacksFrom.push(attackEntry);
           }
           else if(itemInfo.type == "lore") {
