@@ -5,12 +5,15 @@
       <v-col
         v-for="(attack,i) in monsterChanger.attacksFrom"
         :key="i"
+        :cols="3"
       >
         <attack-entry
           :attack="attack"
           :i="i"
         ></attack-entry>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col>
         <add-from-attack-container></add-from-attack-container>
       </v-col>

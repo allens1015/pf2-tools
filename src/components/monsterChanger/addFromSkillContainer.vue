@@ -44,14 +44,14 @@
       <v-card-actions>
         <v-spacer />
         <v-btn
-        @click="addSkill(); skillDialogue = false; resetSkillDialog();"
+        @click="addSkill(); skillDialogue = false;"
         >
           <v-icon>
             mdi-check
           </v-icon>
         </v-btn>
         <v-btn
-        @click="skillDialogue = false; resetSkillDialog();"
+        @click="skillDialogue = false;"
         >
           <v-icon>
             mdi-close
@@ -85,10 +85,6 @@ export default {
       const addedSkill = {"name":monsterChanger.addingSkillName,"value":monsterChanger.addingSkillValue};
       monsterChanger.skillsFrom.push(addedSkill);
       shake();
-    },
-    resetSkillDialog() {
-      this.monsterChanger.addingSkillName = "";
-      this.monsterChanger.addingSkillValue = 0;
     }
   }
 }

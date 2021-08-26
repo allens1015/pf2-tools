@@ -16,12 +16,15 @@
       <v-col
         v-for="(skill,i) in monsterChanger.skillsFrom"
         :key="i"
+        :cols="3"
       >
         <skill-entry
           :skill="skill"
           :i="i"
         ></skill-entry>
       </v-col>
+    </v-row>
+    <v-row>
       <v-col>
         <add-from-skill-container></add-from-skill-container>
       </v-col>

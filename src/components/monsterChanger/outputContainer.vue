@@ -196,7 +196,13 @@ export default {
       const validRowTo = monsterChanger.attacks[crToProcessed];
 
       const i = validRowFrom.findIndex(element => intPropertyValue >= element && element != -1);
-      const newValue = validRowTo[i];
+      let newValue;
+      if(i == -1) {
+        newValue = validRowTo[validRowTo.length-1];
+      }
+      else {
+        newValue = validRowTo[i];
+      }
 
       return newValue;
     },
