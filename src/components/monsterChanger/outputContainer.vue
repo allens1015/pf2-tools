@@ -173,8 +173,15 @@ export default {
         average = ((magnitude/2)+0.5)*quantity + offset;
       }
 
-      const i = validRowFrom.findIndex(element => average >= element.averageDamage && element != -1);
-      const newValue = validRowTo[i].stringDamage;
+      const i = validRowFrom.findIndex(element => average >= element.averageDamage);
+      let newValue;
+      // minimum damage of lowest entry in the "to" table
+      if(i == -1) {
+        newValue = validRowTo[validRowTo.length-1].stringDamage;
+      }
+      else {
+        newValue = validRowTo[i].stringDamage;
+      }
 
       return newValue;
     },
