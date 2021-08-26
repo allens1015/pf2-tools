@@ -56,8 +56,15 @@
     </v-row>
     <!-- attacks -->
     <v-row>
-      <v-col>
-        Attacks go here
+      <v-col
+        v-for="(attack,i) in monsterChanger.attacksFrom"
+        :key="i"
+      >
+        <v-card>
+          <v-card-text>
+            <b>{{ attack.name }}</b> +{{ getNewAttackValue(attack.modifier) }} {{ getNewDamageValue(attack.damage) }}
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
     <!-- spells -->
@@ -88,6 +95,55 @@ export default {
   methods: {
     process() {
       shake();
+    },
+    getNewDamageValue(propertyValue) {
+      // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0
+      const crToProcessed = parseInt(monsterChanger.crTo) + 1;
+      const crFromProcessed = parseInt(monsterChanger.crFrom) + 1;
+
+      // grab the relevant rows
+      const validRowFrom = monsterChanger.damage[crFromProcessed];
+      const validRowTo = monsterChanger.damage[crToProcessed];
+
+      // calculate average based on xdx+x formula
+      let average = 0;
+      let quantity = 0;
+      let magnitude = 0;
+      let offset = 0;
+      if(propertyValue.match(/\d+d\d+\+?\d+?/)) {
+        if(propertyValue.match(/^\d+/)) {
+          quantity = parseInt(propertyValue.match(/^(\d+)/)[1]);
+        }
+        if(propertyValue.match(/\d+d\d+/)) {
+          magnitude = parseInt(propertyValue.match(/^\d+d(\d+)/)[1]);
+        }
+        if(propertyValue.match(/\+\d+/)) {
+          offset = parseInt(propertyValue.match(/^\d+d\d+\+(\d+)/)[1]);
+        }
+      }
+      if(quantity > 0 && magnitude > 0) {
+        average = ((magnitude/2)+0.5)*quantity + offset;
+      }
+
+      const i = validRowFrom.findIndex(element => average >= element.averageDamage && element != -1);
+      const newValue = validRowTo[i].stringDamage;
+
+      return newValue;
+    },
+    getNewAttackValue(propertyValue) {
+      // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0
+      const intPropertyValue = parseInt(propertyValue);
+      const crToProcessed = parseInt(monsterChanger.crTo) + 1;
+      const crFromProcessed = parseInt(monsterChanger.crFrom) + 1;
+
+      // grab the relevant rows
+      const validRowFrom = monsterChanger.attacks[crFromProcessed];
+      const validRowTo = monsterChanger.attacks[crToProcessed];
+
+      const i = validRowFrom.findIndex(element => intPropertyValue >= element && element != -1);
+      const newValue = validRowTo[i];
+
+      return newValue;
     },
     getNewHPValue() {
       const hpFrom = parseInt(monsterChanger.hpFrom);
@@ -129,7 +185,10 @@ export default {
       if(propertyValue > -1) {
         alt = propertyValue;
       }
-      const newValue = validRowTo[i] || alt;
+      let newValue = validRowTo[i] || alt;
+      if(newValue < alt) {
+        newValue = alt;
+      }
 
       return newValue;
     }

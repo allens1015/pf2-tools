@@ -8,12 +8,14 @@
         type="number"
         label="Attack Bonus"
         :value="attack.modifier"
+        @input="updateAttack('modifier',$event,i)"
       >
       </v-text-field>
       <v-text-field
         type="text"
         label="Damage"
         :value="attack.damage"
+        @input="updateAttack('damage',$event,i)"
       >
       </v-text-field>
     </v-card-text>
@@ -36,11 +38,15 @@ import shake from "@/helpers/shaker.js";
 
 export default {
   name: "attackEntry",
-  props: ["attack"],
+  props: ["attack","i"],
   data: () => ({
     monsterChanger
   }),
   methods: {
+    updateAttack(property, value, i) {
+      monsterChanger.attacksFrom[i][property] = value;
+      shake();
+    },
     deleteAttack(i) {
       monsterChanger.attacksFrom.splice(i,1);
       shake();

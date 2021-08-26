@@ -74,6 +74,7 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
 
 export default {
   name: "addAttackContainer",
@@ -84,16 +85,20 @@ export default {
   methods: {
     changeAddingAttackName(value) {
       monsterChanger.addingAttackName = value;
+      shake();
     },
     changeAddingAttackValue(value) {
       monsterChanger.addingAttackModifier = value;
+      shake();
     },
     changeAddingAttackDamage(value) {
       monsterChanger.addingAttackDamage = value;
+      shake();
     },
     addAttack() {
       const addedAttack = {"name":monsterChanger.addingAttackName,"modifier":monsterChanger.addingAttackModifier,"damage":monsterChanger.addingAttackDamage};
       monsterChanger.attacksFrom.push(addedAttack);
+      shake();
     },
     resetAttackDialog() {
       monsterChanger.addingAttackName = "";

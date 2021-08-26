@@ -64,6 +64,8 @@
 
 <script>
 import monsterChanger from "@/models/monsterChanger.js";
+import shake from "@/helpers/shaker.js";
+
 export default {
   name: "addFromSkillContainer",
   data: () => ({
@@ -73,13 +75,16 @@ export default {
   methods: {
     changeAddingSkillName(value) {
       monsterChanger.addingSkillName = value;
+      shake();
     },
     changeAddingSkillValue(value) {
       monsterChanger.addingSkillValue = value;
+      shake();
     },
     addSkill() {
       const addedSkill = {"name":monsterChanger.addingSkillName,"value":monsterChanger.addingSkillValue};
       monsterChanger.skillsFrom.push(addedSkill);
+      shake();
     },
     resetSkillDialog() {
       this.monsterChanger.addingSkillName = "";

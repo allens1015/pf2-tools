@@ -41,8 +41,8 @@ class MonsterChanger {
         this.skills= monsterChangerData.skills;
         this.spellAttack= monsterChangerData.spellAttack;
         this.spellDC= monsterChangerData.spellDC;
-        this.strikeAttack= monsterChangerData.strikeAttack;
-        this.strikeDamage= monsterChangerData.strikeDamage;
+        this.attacks= monsterChangerData.strikeAttack;
+        this.damage= monsterChangerData.strikeDamage;
     }
 }
 
