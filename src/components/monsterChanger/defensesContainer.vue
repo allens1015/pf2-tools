@@ -22,7 +22,7 @@
         <input-field
           type="number"
           property="hpFrom"
-          label="hp"
+          label="HP"
         ></input-field>
       </v-col>
     </v-row>
