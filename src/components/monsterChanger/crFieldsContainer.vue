@@ -71,10 +71,10 @@ export default {
         monsterChanger.perceptionFrom = this.selectedMonster.data.attributes.perception.value;
         monsterChanger.crFrom = this.selectedMonster.data.details.level.value;
         monsterChanger.attacksFrom = [];
+        monsterChanger.skillsFrom = [];
         for(const item in this.selectedMonster.items) {
           const itemInfo = this.selectedMonster.items[item];
           if(itemInfo.type == "melee" || itemInfo.type == "ranged") {
-            console.log(itemInfo);
             const damageKeys = Object.keys(itemInfo.data.damageRolls);
             const damageInfo = itemInfo.data.damageRolls[damageKeys[0]];
             let bonusDamage;
@@ -83,9 +83,18 @@ export default {
               bonusDamage = itemInfo.data.damageRolls[damageKeys[1]].damage;
               bonusDamageType = itemInfo.data.damageRolls[damageKeys[1]].damageType;
             }
-            // console.log(damageKeys);
             const attackEntry = {"name":itemInfo.name,"modifier":itemInfo.data.bonus.value,"damage":damageInfo.damage,"damageType":damageInfo.damageType,"bonusDamage":bonusDamage,"bonusDamageType":bonusDamageType};
             monsterChanger.attacksFrom.push(attackEntry);
+          }
+          else if(itemInfo.type == "lore") {
+            const skillName = itemInfo.name;
+            const skillValue = itemInfo.data.mod.value;
+            const skillEntry = {"name":skillName,"value":skillValue};
+            monsterChanger.skillsFrom.push(skillEntry);
+          }
+          else if(itemInfo.type == "spellcastingEntry") {
+            monsterChanger.spellDCFrom = itemInfo.data.spelldc.dc;
+            monsterChanger.spellAttackFrom = itemInfo.data.spelldc.value;
           }
         }
         if(monsterChanger.crFrom > monsterChanger.crTo) {
