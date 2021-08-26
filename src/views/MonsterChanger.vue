@@ -8,16 +8,17 @@
       </v-container>
       <v-container>
         <v-card>
+          <output-container></output-container>
+        </v-card>
+      </v-container>
+      <v-container>
+        <v-card>
           <general-info-container></general-info-container>
           <defenses-container></defenses-container>
           <offenses-container></offenses-container>
         </v-card>
       </v-container>
-      <v-container>
-        <v-card>
-          <output-container></output-container>
-        </v-card>
-      </v-container>
+     
     </v-main>
   </v-app>
 </template>
