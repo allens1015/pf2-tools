@@ -19,8 +19,17 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col>
-        Skills go here
+      <v-col
+        v-for="(skill,i) in monsterChanger.skillsFrom"
+        :key="i"
+      >
+        <v-card>
+          <v-card-text>
+            <p>
+              <b>{{ skill.name }}</b> +{{ getNewSkillValue(skill.value) }}
+            </p>
+          </v-card-text>
+        </v-card>
       </v-col>
     </v-row>
     <!-- stats -->
@@ -95,6 +104,45 @@ export default {
   methods: {
     process() {
       shake();
+    },
+    getNewSkillValue(propertyValue) {
+      // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0
+      const intPropertyValue = parseInt(propertyValue);
+      const crToProcessed = parseInt(monsterChanger.crTo) + 1;
+      const crFromProcessed = parseInt(monsterChanger.crFrom) + 1;
+
+      // grab the relevant rows
+      const validRowFrom = monsterChanger.skills[crFromProcessed];
+      const validRowTo = monsterChanger.skills[crToProcessed];
+
+      const i = validRowFrom.findIndex(element => intPropertyValue >= element.min && element != -1);
+      let str = propertyValue;
+      if(i != -1) {
+        const newValue = validRowTo[i];
+
+        let min = 0;
+        let max = 0;
+        if(newValue.min) {
+          min = parseInt(newValue.min);
+        }
+        if(newValue.max) {
+          max = parseInt(newValue.max);
+        }
+        str = `${min}`;
+        if(max > min) {
+          str += ` (${max})`;
+        }
+      }
+      else {
+        if(propertyValue > validRowFrom[0].max) {
+          str = validRowTo[0].max;
+        }
+        else {
+          str = validRowTo[validRowFrom.length-1].min;
+        }
+      }
+
+      return str;
     },
     getNewDamageValue(propertyValue) {
       // shove the cr up 1 for indexing purposes- table starts at level=-1 but index 0

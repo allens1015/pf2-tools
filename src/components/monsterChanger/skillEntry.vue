@@ -5,6 +5,7 @@
         type="number"
         :label="skill.name"
         :value="skill.value"
+        @input="updateSkill('value',$event,i)"
       >
       </v-text-field>
     </v-card-text>
@@ -29,9 +30,13 @@ export default {
   name: "skillEntry",
   props: ["skill","i"],
   data: () => ({
-
+    monsterChanger
   }),
   methods: {
+    updateSkill(property, value, i) {
+      monsterChanger.skillsFrom[i][property] = value;
+      shake();
+    },
     deleteSkill(i) {
       monsterChanger.skillsFrom.splice(i,1);
       shake();
