@@ -232,10 +232,7 @@ export default {
 
       // figure out which column is the focus
       const i = validRowFrom.findIndex(element => propertyValue >= element && element != -1);
-      let alt = -1;
-      if(propertyValue > -1) {
-        alt = propertyValue;
-      }
+      let alt = propertyValue;
       let newValue = validRowTo[i] || alt;
       if(newValue < alt) {
         newValue = alt;
