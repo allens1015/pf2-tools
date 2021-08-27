@@ -34,7 +34,7 @@
         <v-combobox
           solo
           clearable
-          :items="getMonsterListings"
+          :items="monsters"
           item-text="name"
           item-value="_id"
           v-model="selectedMonster"
@@ -58,11 +58,6 @@ export default {
     monsters,
     selectedMonster: ""
   }),
-  computed: {
-    getMonsterListings() {
-      return monsters.bestiary1;
-    }
-  },
   methods: {
     updateName(value) {
       monsterChanger.name = value;

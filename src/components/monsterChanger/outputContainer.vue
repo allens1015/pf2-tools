@@ -102,7 +102,7 @@ export default {
         let max = 0;
         if(newValue.min) {
           min = parseInt(newValue.min);
-          if(min < propertyValue) {
+          if(min < propertyValue && crFromProcessed <= crToProcessed) {
             min = propertyValue;
           }
         }
@@ -243,7 +243,7 @@ export default {
       const i = validRowFrom.findIndex(element => propertyValue >= element && element != -1);
       let alt = propertyValue;
       let newValue = validRowTo[i] || alt;
-      if(newValue < alt) {
+      if(newValue < alt && crFromProcessed <= crToProcessed) {
         newValue = alt;
       }
 
