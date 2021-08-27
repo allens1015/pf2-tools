@@ -69,6 +69,7 @@ export default {
     },
     updateFields() {
       if(typeof this.selectedMonster === 'object' && this.selectedMonster !== null) {
+        console.log(this.selectedMonster);
         monsterChanger.name = this.selectedMonster.name;
         monsterChanger.strFrom = this.selectedMonster.data.abilities.str.mod;
         monsterChanger.dexFrom = this.selectedMonster.data.abilities.dex.mod;
@@ -96,7 +97,7 @@ export default {
               bonusDamage = itemInfo.data.damageRolls[damageKeys[1]].damage;
               bonusDamageType = itemInfo.data.damageRolls[damageKeys[1]].damageType;
             }
-            const attackEntry = {"name":itemInfo.name,"modifier":itemInfo.data.bonus.value,"damage":damageInfo.damage,"damageType":damageInfo.damageType,"bonusDamage":bonusDamage,"bonusDamageType":bonusDamageType,"method":itemInfo.data.weaponType.value};
+            const attackEntry = {"name":itemInfo.name,"modifier":itemInfo.data.bonus.value,"damage":damageInfo.damage,"damageType":damageInfo.damageType,"bonusDamage":bonusDamage,"bonusDamageType":bonusDamageType,"method":itemInfo.data.weaponType.value,"traits":itemInfo.data.traits.value};
             monsterChanger.attacksFrom.push(attackEntry);
           }
           else if(itemInfo.type == "lore") {

@@ -47,7 +47,16 @@
           v-for="(attack,i) in monsterChanger.attacksFrom"
           :key="i"
         >
-          <span class="font-weight-bold text-capitalize">{{ attack.method }}</span> <span>{{ attack.name }}+{{ getNewAttackValue(attack.modifier) }},</span> <span class="font-weight-bold">Damage</span> <span>{{ getNewDamageValue(attack.damage) }} {{ attack.damageType }}</span> <span v-if="attack.bonusDamage">plus {{ attack.bonusDamage }} {{ attack.bonusDamageType }}</span>
+          <span class="font-weight-bold text-capitalize">{{ attack.method }}</span> <span>{{ attack.name }}+{{ getNewAttackValue(attack.modifier) }}
+            <template v-if="attack.traits.length">
+              (<span
+                v-for="(trait,j) in attack.traits"
+                :key="j"
+              >
+                <template v-if="j > 0">, </template>
+                <span>{{ trait }}</span>
+              </span>)
+            </template>,</span> <span class="font-weight-bold">Damage</span> <span>{{ getNewDamageValue(attack.damage) }} {{ attack.damageType }}</span> <span v-if="attack.bonusDamage">plus {{ attack.bonusDamage }} {{ attack.bonusDamageType }}</span>
         </li>
         <li>
           <span class="font-weight-bold">Spell DC</span> <span>{{ getNewScalarValue('spellDCFrom','spellDC') }}, attack +{{ getNewScalarValue('spellAttackFrom','spellAttack') }}</span>
