@@ -15,6 +15,8 @@
             :value="monsterChanger.crFrom"
             type="number"
             label="CR From"
+            min="-1"
+            max="24"
             @input="updateCRFrom($event)"
         >
         </v-text-field>
@@ -24,6 +26,8 @@
           :value="monsterChanger.crTo"
           type="number"
           label="CR To"
+          min="-1"
+          max="24"
           @input="updateCRTo($event)"
         >
         </v-text-field>
