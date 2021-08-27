@@ -80,6 +80,8 @@ export default {
         monsterChanger.crFrom = this.selectedMonster.data.details.level.value;
         monsterChanger.attacksFrom = [];
         monsterChanger.skillsFrom = [];
+        monsterChanger.spellDCFrom = 0;
+        monsterChanger.spellAttackFrom = 0;
         for(const item in this.selectedMonster.items) {
           const itemInfo = this.selectedMonster.items[item];
           if(itemInfo.type == "melee" || itemInfo.type == "ranged") {
