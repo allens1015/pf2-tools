@@ -69,7 +69,6 @@ export default {
     },
     updateFields() {
       if(typeof this.selectedMonster === 'object' && this.selectedMonster !== null) {
-        console.log(this.selectedMonster);
         monsterChanger.name = this.selectedMonster.name;
         monsterChanger.strFrom = this.selectedMonster.data.abilities.str.mod;
         monsterChanger.dexFrom = this.selectedMonster.data.abilities.dex.mod;
