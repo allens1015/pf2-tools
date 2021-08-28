@@ -66,7 +66,7 @@ class Items {
             this.all.push(new Item(data));
         });
 
-        console.log(this.all);
+        // console.log(this.all);
     }
 }
 

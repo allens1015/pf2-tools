@@ -38,10 +38,8 @@
         <v-combobox
           solo
           clearable
-          :items="monsters"
-          item-text="name"
-          item-value="_id"
-          v-model="selectedMonster"
+          :items="monsterNames"
+          v-model="selectedMonsterName"
           @change="updateFields()"
         >
         </v-combobox>
@@ -59,14 +57,20 @@ import monsters from "@/models/monsters.js";
 export default {
   data: () => ({
     monsterChanger,   
-    monsters,
-    selectedMonster: ""
+    monsterNames: monsters.monsterNames,
+    selectedMonsterName: "",
+    selectedMonster: {}
   }),
   methods: {
     updateName(value) {
       monsterChanger.name = value;
     },
-    updateFields() {
+    async updateFields() {
+      const encodedURIString = encodeURI(this.selectedMonsterName);
+      await monsters.loadMonster(encodedURIString);
+      // this is cheap and i should fix it later
+      this.selectedMonster = monsters.monster;
+
       if(typeof this.selectedMonster === 'object' && this.selectedMonster !== null) {
         monsterChanger.name = this.selectedMonster.name;
         monsterChanger.strFrom = this.selectedMonster.data.abilities.str.mod;
@@ -111,7 +115,7 @@ export default {
             monsterChanger.spellAttackFrom = itemInfo.data.spelldc.value;
           }
         }
-        if(monsterChanger.crFrom > monsterChanger.crTo) {
+        if(monsterChanger.crFrom != monsterChanger.crTo) {
           monsterChanger.crTo = monsterChanger.crFrom;
         }
       }

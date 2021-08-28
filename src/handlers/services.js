@@ -1,4 +1,5 @@
 const URL = 'https://api.pathfinder2.fr/v1/pf2';
+const LocalAPI = 'https://nori.ngrok.io/pf2api/';
 
 function request(method, url, data) {
     let defaultHeaders = {
@@ -71,7 +72,21 @@ class ItemService {
     }
 }
 
+class MonsterService {
+    async fetchMonsterNames() {
+        const res = await request('GET', `${LocalAPI}/bestiary-names`);
+
+        return JSON.parse(res);
+    }
+    async fetchMonster(uriEncodeString) {
+        const res = await request('GET', `${LocalAPI}/bestiary?name=${uriEncodeString}`);
+
+        return JSON.parse(res);
+    }
+}
+
 module.exports = {
     spell: new SpellService(),
-    item: new ItemService()
+    item: new ItemService(),
+    monsters: new MonsterService()
 }

@@ -13,6 +13,7 @@
 <script>
 import spellsModel from './models/spells';
 import itemsModel from './models/items';
+import monstersModel from './models/monsters';
 
 export default {
     name: 'App',
@@ -24,6 +25,7 @@ export default {
     mounted() {
         spellsModel.loadSpells();
         itemsModel.loadItems();
+        monstersModel.loadMonsterNames();
     }
 }
 </script>
