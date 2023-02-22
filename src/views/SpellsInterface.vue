@@ -116,7 +116,7 @@ import spellsModel from '../models/spells';
 import distinct from '../helpers/distinct';
 
 export default {
-    name: 'spells',
+    name: 'SpellsInterface',
     data() {
         return {
             distinct,

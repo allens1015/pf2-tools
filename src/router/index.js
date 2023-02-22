@@ -1,24 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import HomePage from '../views/HomePage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'HomePage',
+    component: HomePage
   },
   {
     path: '/spells',
-    name: 'Spells',
-    component: () => import('../views/Spells.vue')
+    name: 'SpellsInterface',
+    component: () => import('../views/SpellsInterface.vue')
   },
   {
     path: '/items',
-    name: 'Items',
-    component: () => import('../views/Items.vue')
+    name: 'ItemsInterface',
+    component: () => import('../views/ItemsInterface.vue')
   },
   {
     path: '/monsterchanger',

@@ -113,7 +113,7 @@
 import itemCard from "@/components/itemCard.vue"
 
 export default {
-  name: 'Items',
+  name: 'ItemsInterface',
 
   components: {
     itemCard
